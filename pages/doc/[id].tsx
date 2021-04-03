@@ -4,21 +4,38 @@ import { API_ENDPOINT } from "../../lib/config";
 import { MDXProvider } from "@mdx-js/react";
 import hydrate from "next-mdx-remote/hydrate";
 import axios from "axios";
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import MDXViewer from "../../components/MDXViewer";
+import Spinner from "../../components/Spinner";
 
-export default function Doc({ content, error, source }) {
+export default function Doc({ content, error }) {
   //   console.log(content, error, source);
   //   const router = useRouter();
   const [copiedContent, setCopiedContent] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [source, setSource] = useState();
 
   if (error) {
     return <NavBarLayout>We couldn't find that page {":((("}</NavBarLayout>;
   }
 
-  const rendered = hydrate(source);
+  const getRenderedOutput = () => {
+    console.log("Getting rendered output...");
+    axios
+      .post(`${API_ENDPOINT}/api/render`, {
+        markdown: content,
+      })
+      .then((res) => res.data)
+      .then((res) => res.source)
+      .then((src) => {
+        console.log(src);
+        setSource(src);
+      });
+  };
 
-  console.log(rendered);
+  useEffect(() => {
+    getRenderedOutput();
+  }, []);
 
   return (
     <MDXProvider>
@@ -55,7 +72,7 @@ export default function Doc({ content, error, source }) {
             {content}
           </textarea>
           <div className="flex px-2 border-l border-r w-full">
-            <article className="w-full prose-lg">{rendered}</article>
+            {source ? <MDXViewer source={source} /> : <Spinner w={24} h={24} /> }
           </div>
         </div>
       </NavBarLayout>
@@ -69,13 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `${API_ENDPOINT}/api/doc/${id}`
   ).then((res) => res.json());
 
-  console.error(`${API_ENDPOINT}/api/doc/${id}`)
-
-  const { source } = await axios
-    .post(`${API_ENDPOINT}/api/render`, {
-      markdown: content,
-    })
-    .then((res) => res.data);
+  console.error(`${API_ENDPOINT}/api/doc/${id}`);
 
   //   console.log(source);
   //   console.log(content);
@@ -89,7 +100,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       content,
-      source,
+      // source,
     },
   };
 };
