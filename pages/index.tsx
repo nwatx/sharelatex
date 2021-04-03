@@ -41,11 +41,11 @@ export default function Home() {
             What is Share<b className="text-blue-500">Latex</b>?
           </h3>
           <p>
-            To make things simple, ShareLatex is a simple markdown + LaTeX tool,
+            ShareLatex is a simple markdown + LaTeX tool,
             allowing for easy sharing of math and related documents (think
             Pastebin but with LaTeX and Markdown). To write LaTeX expressions,
             simply surround your expression with the <code>$</code> delimeter,
-            or <code>$$</code> for display mode LaTeX. You can check out an
+            or <code>$$</code> for display mode LaTeX. All markdown expressions are supported as well. You can check out an
             example <Link href="/doc/FnP8eQxgC8B9Xd0tzaW6">here.</Link> Want to
             contribute? You can check our Github repository out{" "}
             <Link href="https://github.com/nwatx/sharelatex">here.</Link>
