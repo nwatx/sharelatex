@@ -54,7 +54,7 @@ export default function Doc({ content, error, source }) {
           >
             {content}
           </textarea>
-          <div className="flex justify-center w-full">
+          <div className="flex px-2 border-l border-r w-full">
             <article className="w-full prose">{rendered}</article>
           </div>
         </div>
