@@ -35,7 +35,7 @@ export default function Doc({ content, error }) {
 
   useEffect(() => {
     getRenderedOutput();
-  }, []);
+  }, [content]);
 
   return (
     <MDXProvider>
