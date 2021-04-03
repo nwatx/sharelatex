@@ -21,15 +21,17 @@ export default function Doc({ content, error }) {
 
   const getRenderedOutput = () => {
     console.log("Getting rendered output...");
-    axios
-      .post(`${API_ENDPOINT}/api/render`, {
+    fetch(`${API_ENDPOINT}/api/render`, {
+      method:'POST',
+      body: JSON.stringify({
         markdown: content,
       })
-      .then((res) => res.data)
-      .then((res) => res.source)
-      .then((src) => {
-        console.log(src);
-        setSource(src);
+      })
+      .then((res) => res.json())
+      .then(res => {
+        const { source } = res;
+        console.log(source);
+        setSource(source);
       });
   };
 

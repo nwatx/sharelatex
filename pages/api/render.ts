@@ -4,7 +4,7 @@ import renderToString from "next-mdx-remote/render-to-string";
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { markdown } = req.body;
+    const { markdown } = JSON.parse(req.body);
 
     console.log(JSON.stringify(req.body));
     
