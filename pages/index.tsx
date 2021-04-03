@@ -19,7 +19,7 @@ export default function Home() {
       .then((res) => {
         const { id } = res.data;
         router.push(`/doc/${id}`);
-        setLoading(false);
+        // setLoading(false);
       });
   };
 
