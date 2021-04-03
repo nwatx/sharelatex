@@ -1,8 +1,6 @@
 import axios from "axios";
-import Head from "next/head";
 import { useState } from "react";
 import NavBarLayout from "../layouts/NavbarLayout";
-import { db } from "../lib/firebase/firestore";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
