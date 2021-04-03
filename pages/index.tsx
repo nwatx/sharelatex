@@ -27,7 +27,7 @@ export default function Home() {
     <NavBarLayout>
       <div className="flex flex-col w-full items-center space-y-3">
         <textarea
-          className="bg-gray-50 w-full h-96 border-2 focus:border-blue-400 overflow-auto outline-none resize-none rounded-md my-2 p-1"
+          className="bg-gray-50 w-full h-96 border-2 focus:border-blue-400 overflow-auto outline-none resize-none rounded-md my-2 p-1 px-2"
           onChange={(e) => setText(e.target.value)}
           placeholder="Paste content here..."
         />
