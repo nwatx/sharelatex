@@ -22,7 +22,8 @@ export default function Doc({ content, error }) {
   const getRenderedOutput = () => {
     console.log("Getting rendered output...");
     fetch(`${API_ENDPOINT}/api/render`, {
-      method:'POST',
+      method: 'POST',
+      mode: 'cors',
       body: JSON.stringify({
         markdown: content,
       })
