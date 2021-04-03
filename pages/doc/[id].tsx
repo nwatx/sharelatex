@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `${API_ENDPOINT}/api/doc/${id}`
   ).then((res) => res.json());
 
-  console.log(`${API_ENDPOINT}/api/doc/${id}`)
+  console.error(`${API_ENDPOINT}/api/doc/${id}`)
 
   const { source } = await axios
     .post(`${API_ENDPOINT}/api/render`, {
