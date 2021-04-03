@@ -33,9 +33,7 @@ export default function Doc({ content, error }) {
       });
   };
 
-  useEffect(() => {
-    getRenderedOutput();
-  }, [content]);
+  if(!source) getRenderedOutput();
 
   return (
     <MDXProvider>
@@ -72,7 +70,7 @@ export default function Doc({ content, error }) {
             {content}
           </textarea>
           <div className="flex px-2 border-l border-r w-full">
-            {source ? <MDXViewer source={source} /> : <Spinner w={24} h={24} /> }
+            {source ? <MDXViewer source={source} /> : <Spinner w={24} h={24} />}
           </div>
         </div>
       </NavBarLayout>
