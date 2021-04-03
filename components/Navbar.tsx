@@ -13,7 +13,7 @@ const Navbar = () => {
               </p>
             </Link>
           </div>
-          <div className="-mr-2 -my-2 md:hidden">
+          <div className="sr-only -mr-2 -my-2 md:hidden">
             <button
               type="button"
               className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -548,7 +548,7 @@ const Navbar = () => {
       From: "opacity-100 scale-100"
       To: "opacity-0 scale-95"
   --> */}
-      <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+      <div className="sr-only absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
         <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
           <div className="pt-5 pb-6 px-5">
             <div className="flex items-center justify-between">
