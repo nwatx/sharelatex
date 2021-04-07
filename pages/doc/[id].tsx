@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import NavBarLayout from "../../layouts/NavbarLayout";
 import { API_ENDPOINT } from "../../lib/config";
 import { MDXProvider } from "@mdx-js/react";
@@ -22,21 +22,21 @@ export default function Doc({ content, error }) {
   const getRenderedOutput = () => {
     console.log("Getting rendered output...");
     fetch(`${API_ENDPOINT}/api/render`, {
-      method: 'POST',
-      mode: 'cors',
+      method: "POST",
+      mode: "cors",
       body: JSON.stringify({
         markdown: content,
-      })
-      })
+      }),
+    })
       .then((res) => res.json())
-      .then(res => {
+      .then((res) => {
         const { source } = res;
         console.log(source);
         setSource(source);
       });
   };
 
-  if(!source) getRenderedOutput();
+  if (!source) getRenderedOutput();
 
   return (
     <MDXProvider>
@@ -81,21 +81,30 @@ export default function Doc({ content, error }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params;
   const { content, error } = await fetch(
     `${API_ENDPOINT}/api/doc/${id}`
   ).then((res) => res.json());
 
-  console.error(`${API_ENDPOINT}/api/doc/${id}`);
+  console.log(`${API_ENDPOINT}/api/doc/${id}`);
 
-  //   console.log(source);
-  //   console.log(content);
+  // console.log(source);
+  // console.log(content);
+
   if (error) {
     return {
       props: {
         error,
       },
+      // revalidate: 1000000,
     };
   }
   return {
@@ -103,5 +112,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       content,
       // source,
     },
+    // revalidate: 1000000,
   };
 };

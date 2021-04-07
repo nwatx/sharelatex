@@ -20,6 +20,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       return res.status(422).json({ errors: errors.array });
     }
 
+    // console.log("here");
+
     return new Promise((resolve, reject) => {
       db.docs
         .doc(`${id}`)
@@ -29,9 +31,9 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
           else return doc.data();
         })
         .then((data) => {
-          if(data) res.status(200).json(data);
+          if (data) res.status(200).json(data);
           resolve("Succesfully parsed data");
-        })
-    }).catch(e => res.status(400).json({error: e}));
+        });
+    }).catch((e) => res.status(400).json({ error: e }));
   }
 }
